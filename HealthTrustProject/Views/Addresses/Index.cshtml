@@ -1,0 +1,44 @@
+﻿@model List<HealthTrustProject.Addresses>
+@{
+    ViewBag.Title = "Addresses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    long id = Convert.ToInt64(ViewContext.RouteData.Values["id"]);
+    HealthTrustProject.ContactsMgr cdm = new ContactsMgr();
+    Contacts contact = cdm.Get(id);
+}
+<div id="target" class="jumbotron">
+    <h3>HealthTrust Addresses for @contact.FirstName  @contact.LastName</h3>
+    @Html.ActionLink("Insert a Address", "Insert", "Addresses", new { Id = id }, null)
+    <br />
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Address Type</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Address 1</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Address 2</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">City</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">State Code</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Zip</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Edit</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Delete</div>
+        <div style="width:100%;overflow:hidden;margin:0px auto;float:none;font-weight:bold;"><hr /></div>
+        @foreach (var item in Model)
+        {
+            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.addressType&nbsp;</div>
+            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.AddressLine1&nbsp;</div>
+            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.AddressLine2&nbsp;</div>
+            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.City &nbsp;</div>
+            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.StateCode&nbsp;</div>
+            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.Zip&nbsp;</div>
+            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@Html.ActionLink("Update", "Update", "Addresses", new { Id = item.ID }, null) &nbsp;</div>
+            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">
+                @Ajax.ActionLink("Delete", "Delete", "Addresses", new { Id = item.ID }, new AjaxOptions
+           {
+               HttpMethod = "POST",
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "target",
+               OnComplete = "successPublish",
+               Confirm = "Are you Sure?"
+           }) &nbsp;
+            </div>
+            <div style="width:100%;overflow:hidden;margin:0px auto;float:none;"><hr /></div>
+            }
+        </div>
+

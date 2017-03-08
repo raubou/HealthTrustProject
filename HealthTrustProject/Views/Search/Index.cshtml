@@ -1,0 +1,21 @@
+﻿@model  HealthTrustProject.Contacts
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="target" class="jumbotron">
+    @using (Html.BeginForm("Index", "Search"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <h3> Search by name or email address </h3>
+        @*@Html.TextBox("SearchTxt",null, new { placeholder = "Enter name or email", @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })*@
+        @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })
+        <input type="submit" id="btnSubmit" value="Search" />
+
+    }
+</div>
+
+<script type="text/javascript" src="~/Scripts/PublishMessage.js">
+</script>

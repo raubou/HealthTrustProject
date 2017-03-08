@@ -1,0 +1,48 @@
+﻿@model HealthTrustProject.Addresses
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    long id = Convert.ToInt64(ViewContext.RouteData.Values["id"]);
+    HealthTrustProject.ContactsMgr cdm = new ContactsMgr();
+    Contacts contact = cdm.Get(id);
+    //Model.Contact = contact;
+}
+<div id="target" class="jumbotron">
+    @using (Ajax.BeginForm("Update", "Addresses", new { Id = id }, new AjaxOptions { HttpMethod = "Post", OnSuccess = "successPublish", OnFailure = "failedPublish" }, new { id = "addressInsert", name = "addressInsert", @class = "formma", UpdateTargetId = "target" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <h3>Update Address for @contact.FirstName  @contact.LastName</h3>
+        <ul>
+            <li class="liInsert">Address Type</li>
+            <li class="liInsert">Address 1</li>
+            <li class="liInsert">Address 2</li>
+            <li class="liInsert">City</li>
+            <li class="liInsert">State Code</li>
+            <li class="liInsert">Zip</li>
+        </ul>
+        <ul>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.addressType, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.AddressLine1, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.AddressLine2, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.City, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.StateCode, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.Zip, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
+        </ul>
+        <ul>
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.AddressLine1, "Enter Address1", new { @class = "field-validation-error" })  </li>
+            @*<li class="liInsert">@Html.ValidationMessageFor(model => model.AddressLine2, "No", new { @class = "field-validation-error" })  </li>*@
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.City, "Enter City", new { @class = "field-validation-error" })  </li>
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.StateCode, "Enter State", new { @class = "field-validation-error" })  </li>
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.Zip, "Enter Zip", new { @class = "field-validation-error" })  </li>
+        </ul>
+        <div style="width:100%;height:auto;overflow:hidden;margin:0px auto;float:none;text-align:center;">
+            <input type="submit" id="btnSubmit" value="Update Record" />
+        </div>
+    }
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/PublishMessage.js">
+</script>

@@ -1,0 +1,43 @@
+﻿@model Contacts
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="target" class="jumbotron">
+    @using (Ajax.BeginForm("Insert", "Contacts", FormMethod.Post, new AjaxOptions { OnSuccess = "successPublish", OnFailure = "failedPublish" }, new { id = "contactsInsert", name = "contactsInsert", @class = "formma", UpdateTargetId = "target" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <h2>Insert a Contact</h2>
+        <ul>
+            <li class="liInsert">First Name</li>
+            <li class="liInsert">Last Name</li>
+            <li class="liInsert">Email Address</li>
+            <li class="liInsert">Birth Date</li>
+            <li class="liInsert">Num of Computers</li>
+        </ul>
+        <ul>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.FirstName, new { @class = "field-validation-error" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.LastName, new { @class = "field-validation-error" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.EmailAddress, new { @class = "field-validation-error" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.Birthdate, new { @class = "field-validation-error" })</li>
+            <li class="liInsert">@Html.TextBoxFor(Model => Model.NumberOfComputers, new { @class = "field-validation-error" })</li>
+        </ul>
+        <ul>
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.FirstName, "Enter First Name", new { @class = "text-danger" })  </li>
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.LastName, "Enter Last Name", new { @class = "text-danger" })  </li>
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.EmailAddress, "Enter Email Address", new { @class = "text-danger" })  </li>
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.Birthdate, "Enter Birth Date", new { @class = "text-danger" })  </li>
+            <li class="liInsert">@Html.ValidationMessageFor(model => model.NumberOfComputers, "Enter Number of Computers", new { @class = "text-danger" })  </li>
+        </ul>
+        <div style="width:100%;height:auto;overflow:hidden;margin:0px auto;float:none;text-align:center;">
+            <input type="submit" id="btnSubmit" value="Add Record" />
+        </div>
+    }
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/PublishMessage.js">
+</script>
+

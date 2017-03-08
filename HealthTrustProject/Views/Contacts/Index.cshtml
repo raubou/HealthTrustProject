@@ -1,0 +1,45 @@
+﻿@model List<HealthTrustProject.Contacts>
+@{
+    ViewBag.Title = "Contacts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="target" class="jumbotron">
+    <h1>HealthTrust Contacts</h1>
+    @Html.ActionLink("Insert a Contact", "Insert", "Contacts")
+    <br />
+
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">First Name</div>
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Last Name</div>
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Email</div>
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Birth Date</div>
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Number of Computers</div>
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Edit</div>
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Delete</div>
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">Add Address</div>
+    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;font-weight:bold;">View Address</div>
+    <div style="width:100%;overflow:hidden;margin:0px auto;float:none;font-weight:bold;"><hr /></div>
+    @foreach (var item in Model)
+    {
+
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.FirstName&nbsp;</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.LastName&nbsp;</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.EmailAddress&nbsp;</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.Birthdate.ToShortDateString()&nbsp;</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.NumberOfComputers&nbsp;</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@Html.ActionLink("Update","Update","Contacts",new { Id = item.ID },null) &nbsp;</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@Ajax.ActionLink("Delete", "Delete", "Contacts", new { Id = item.ID }, new AjaxOptions
+                                                                      {
+                                                                          HttpMethod = "POST",
+                                                                          InsertionMode = InsertionMode.Replace,
+                                                                          UpdateTargetId = "target",
+                                                                          OnComplete = "successPublish",
+                                                                          Confirm = "Are you Sure?"
+                                                                      }) &nbsp;</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@Html.ActionLink("Add Address", "Insert", "Addresses", new { Id = item.ID }, null) &nbsp;</div>
+        <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@Html.ActionLink("View Address", "Index", "Addresses", new { Id = item.ID }, null) &nbsp;</div>
+        <div style="width:100%;overflow:hidden;margin:0px auto;float:none;"><hr /></div>
+    }
+</div>
+
+
+
