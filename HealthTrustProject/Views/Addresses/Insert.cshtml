@@ -2,7 +2,9 @@
 @{
     ViewBag.Title = "Insert";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    long id = Convert.ToInt64(ViewContext.RouteData.Values["id"]);
+    long? id = Convert.ToInt64(ViewContext.RouteData.Values["id"]);
+    if (id == null || id == 0)
+        {Response.Redirect("~/home"); }
     HealthTrustProject.ContactsMgr cdm = new ContactsMgr();
     Contacts contact = cdm.Get(id);
     //Model.Contact = contact;
@@ -23,7 +25,9 @@
             <li class="liInsert">Zip</li>
         </ul>
         <ul>
-            <li class="liInsert">@Html.TextBoxFor(Model => Model.addressType, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
+            @*<li class="liInsert">@Html.TextBoxFor(Model => Model.addressType, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>*@
+            <li class="liInsert">@Html.DropDownListFor(Model => Model.addressType,EnumHelper.GetSelectList(typeof(addressType)),"Select Address Type",new { @class = "form-control" })
+        </li>
             <li class="liInsert">@Html.TextBoxFor(Model => Model.AddressLine1, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
             <li class="liInsert">@Html.TextBoxFor(Model => Model.AddressLine2, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>
             <li class="liInsert">@Html.TextBoxFor(Model => Model.City, new { @class = "form-control", @style = "background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAALZJREFUOBFjYKAANDQ0rGWiQD9IqzgL0BQ3IKMXiB8AcSKQ/waIrYDsKUD8Fir2pKmpSf/fv3+zgPxfzMzMSbW1tbeBbAaQC+b+//9fB4h9gOwikCAQTAPyDYHYBciuBQkANfcB+WZAbPP37992kBgIUOoFBiZGRsYkIL4ExJvZ2NhAXmFgYmLKBPLPAfFuFhaWJpAYEBQC+SeA+BDQC5UQIQpJYFgdodQLLyh0w6j20RCgUggAAEREPpKMfaEsAAAAAElFTkSuQmCC');background-repeat: no-repeat;background-attachment: scroll;background-size: 16px 18px;background-position: 98 % 50 %;cursor: auto;" })</li>

@@ -21,22 +21,43 @@
         <div style="width:100%;overflow:hidden;margin:0px auto;float:none;font-weight:bold;"><hr /></div>
         @foreach (var item in Model)
         {
-            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.addressType&nbsp;</div>
-            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.AddressLine1&nbsp;</div>
-            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.AddressLine2&nbsp;</div>
-            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.City &nbsp;</div>
-            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.StateCode&nbsp;</div>
-            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.Zip&nbsp;</div>
-            <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@Html.ActionLink("Update", "Update", "Addresses", new { Id = item.ID }, null) &nbsp;</div>
             <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">
-                @Ajax.ActionLink("Delete", "Delete", "Addresses", new { Id = item.ID }, new AjaxOptions
-           {
-               HttpMethod = "POST",
-               InsertionMode = InsertionMode.Replace,
-               UpdateTargetId = "target",
-               OnComplete = "successPublish",
-               Confirm = "Are you Sure?"
-           }) &nbsp;
+    @{ switch (item.addressType)
+        {
+            case 1:
+                WriteLiteral("Home");
+                break;
+            case 2:
+                WriteLiteral("Work");
+                break;
+            case 3:
+                WriteLiteral("Other");
+                break;
+        }
+            }
+            &nbsp;</div>
+        
+                    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.AddressLine1&nbsp;</div>
+        
+                    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.AddressLine2&nbsp;</div>
+        
+                    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.City &nbsp;</div>
+        
+                    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.StateCode&nbsp;</div>
+        
+                    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@item.Zip&nbsp;</div>
+        
+                    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">@Html.ActionLink("Update", "Update", "Addresses", new { Id = item.ID }, null) &nbsp;</div>
+        
+                    <div style="width:11%;overflow:hidden;margin:0px auto;float:left;">
+                        @Ajax.ActionLink("Delete", "Delete", "Addresses", new { Id = item.ID }, new AjaxOptions
+                        {
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "target",
+                            OnComplete = "successPublish",
+                            Confirm = "Are you Sure?"
+                        }) &nbsp;
             </div>
             <div style="width:100%;overflow:hidden;margin:0px auto;float:none;"><hr /></div>
             }
